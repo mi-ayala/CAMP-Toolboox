@@ -5,6 +5,9 @@ function EvaluationMatrix = EvalTaylorFourier(TF, sigma, theta,L)
 %%%   sigma Taylor domain
 %%%   theta Fourier domain
 %%%   L = 2pi/Period
+% ================================================
+% Nov 2021, Miguel Ayala.
+% ================================================
     N = length(TF(:,1)) -1;
 
     TaylorMatrix = zeros(N+1,length(theta));
