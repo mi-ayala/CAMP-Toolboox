@@ -4,7 +4,9 @@ function sum = EvalFourier(L,x,t)
 %%%% L 2pi/Period
 %%%% x Fourier coefficients
 %%%% t [0 .. Period]
-%%%%
+% ================================================
+% Nov 2021, Miguel Ayala.
+% ================================================
     a = real(x);
     b = imag(x);
 
