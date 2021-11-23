@@ -5,6 +5,9 @@ function  f=EvalTaylor(TaylorCoeff,t)
 %%%% t Time domain 
 %%%% Output 
 %%%% F(t)
+% ================================================
+% Nov 2021, Miguel Ayala.
+% ================================================
 
     t= reshape(t,1,[]);
     N = length(TaylorCoeff)-1;
