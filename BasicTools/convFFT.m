@@ -1,5 +1,8 @@
 function s = convFFT(a1,a2)
     %%% For one-sided sequences
+    % ================================================
+    % Nov 2021, Miguel Ayala.
+    % ================================================
     
         a1 = reshape(a1,[],1);
         a2 = reshape(a2,[],1);
