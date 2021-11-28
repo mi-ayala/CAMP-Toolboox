@@ -1,4 +1,4 @@
 # CAMP-Toolboox
 
 
-Some of the tool require Intlab.
+Some of the tools require Intlab.
