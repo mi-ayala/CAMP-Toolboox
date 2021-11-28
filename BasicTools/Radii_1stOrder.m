@@ -1,0 +1,122 @@
+function [rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
+% ================================================
+%  RADII POLYNOMIAL 1ST ORDER
+% ================================================
+% Example
+% ================================================
+% radii_1stOrder(f, df, df2, A, 'printResults', 'off')
+% ================================================
+% INPUT
+% ================================================
+% f ............... Function and derivative,[F,dF] 
+% x ............... Aproximated solution
+% A ............... Derivative inverse approx.
+% ================================================
+% OPTIONAL INPUT
+% ================================================
+% printResults .... Followed by 'on' or 'off'
+% ================================================
+% OUTPUT
+% ================================================
+% rmin ............ Min  existence radius
+% rmax ............ Max  existence radius
+% I ............... 0 for Success, 1 for fail
+% ================================================
+%  PRINTED OUTPUT
+% ================================================
+% 1. Y Bound
+% 2. Z Bound
+% 3. r*
+% 4. Existence interval size size
+% ================================================
+% February 2021, Miguel Ayala.
+% ================================================ 
+  
+   %%% This part handles the inputs. I do this so I can suppress printed
+   %%% output easily.
+   default_printResults = 'on';
+   expected_printResults = {'on','off'};
+
+   p = inputParser;
+   
+   addRequired(p,'f');
+   addRequired(p,'x');
+   addRequired(p,'A');
+   
+   addParameter(p,'printResults',default_printResults,...
+                 @(x) any(validatestring(x,expected_printResults)));
+   
+   parse(p,f, x, A,varargin{:});
+   
+   f = p.Results.f;
+   x = p.Results.x;
+   A = p.Results.A;
+      
+   if strcmp(p.Results.printResults,'on')
+           printResults = 1;
+   else
+           printResults = 0;
+   end
+   
+    %%% ***************************************
+    %%% MATH STARTS HERE
+    %%% ***************************************
+
+    [f_int,df_int] = f(intval(x));
+    
+    for i = 1:52
+        
+        r_star = 1/(2^i);
+        x_ball = midrad(x, r_star);
+        [f_ball, df_ball] = f(x_ball);
+        
+        %%% Z bound, should be less than one.
+        Z = sup(norm(eye(length(A(1,:))) - A*df_ball,inf));
+        
+        if Z < 1
+            
+            %%% Bound Y0
+            Y = sup(norm(A*f_int,inf));
+            
+            Y = intval(Y);
+            Z = intval(Z);
+            
+            if sup(-Y/(Z-1) - r_star ) < 0
+                
+                 rmin= sup(-Y/(Z-1));
+                 rmax=r_star;     
+                 
+                 existenceInterval_size = abs(rmax-rmin);
+                 I = 0; 
+                 
+                 fprintf([ '\n'...
+                        'Radii_1stOrder: Successful validation.' ...
+                        '\n \n' ...         
+                        ]) 
+                 
+                 if printResults == 1
+                      fprintf([ 
+                        '                Y Bound = %i,\n' ...
+                        '                Z Bound =  %g, \n' ...
+                        '                r_star   =  %g, \n' ...
+                        '                Existence Interval size =  %g. \n' ...           
+                        ], [mid(Y),mid(Z),r_star,existenceInterval_size]) 
+                 end                    
+                                 
+                return
+            end
+        
+        end
+        
+        if i==52
+                 I = 1;
+                 rmin= 0;
+                 rmax=0; 
+                 fprintf([ '\n'...
+                        'Radii_1stOrder: It was not possible to find a r_star.'          
+                        ])              
+        end
+        
+    end
+       
+end
