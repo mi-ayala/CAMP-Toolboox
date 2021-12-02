@@ -1,7 +1,7 @@
-function  f=EvalTaylor(TaylorCoeff,t)
+function  f = EvalTaylor(TaylorCoeff,t)
 %%%% General Taylor evaluation Function at times t
 %%%% Input 
-%%%% x Taylor coefficients
+%%%% TaylorCoeff Taylor coefficients
 %%%% t Time domain 
 %%%% Output 
 %%%% F(t)
@@ -9,7 +9,7 @@ function  f=EvalTaylor(TaylorCoeff,t)
 % Nov 2021, Miguel Ayala.
 % ================================================
 
-    t= reshape(t,1,[]);
+    t = reshape(t,1,[]);
     N = length(TaylorCoeff)-1;
     TaylorCoeff = reshape(TaylorCoeff,1,[]);
    
@@ -17,7 +17,7 @@ function  f=EvalTaylor(TaylorCoeff,t)
     expMatrix = repmat((0:N)', 1, length(t)  );
     coeffMatrix = repmat(TaylorCoeff', 1, length(t)  );
     
-    f= sum(coeffMatrix.*(tMatrix.^expMatrix));
+    f = sum(coeffMatrix.*(tMatrix.^expMatrix));
     
 
 end

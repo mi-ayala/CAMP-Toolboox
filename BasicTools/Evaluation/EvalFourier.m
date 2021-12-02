@@ -1,4 +1,4 @@
-function sum = EvalFourier(L,x,t)
+function f = EvalFourier(L,x,t)
 %%%% General Fourier evaluation Function
 %%%% Input 
 %%%% L 2pi/Period
@@ -17,11 +17,11 @@ function sum = EvalFourier(L,x,t)
     t_steps = length(t);
     m= ( length(a)-1)/2;
         
-    sum = zeros(t_steps,1);   
+    f = zeros(t_steps,1);   
     
     for k = -m:m
-        %sum = sum + a(k + m +1)*cos(k*L.*t) + b(k + m +1)*sin(k*L.*t);
-        sum =  sum  + real( (a(k + m +1) + 1i*b(k + m +1))*(cos(k*L.*t) + 1i*sin(k*L.*t)) );
+        %f = f + a(k + m +1)*cos(k*L.*t) + b(k + m +1)*sin(k*L.*t);
+        f =  f  + real( (a(k + m +1) + 1i*b(k + m +1))*(cos(k*L.*t) + 1i*sin(k*L.*t)) );
     end
     
 
