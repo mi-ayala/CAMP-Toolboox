@@ -14,8 +14,8 @@ function a1a2 = convToeplitz(a1,a2)
 
     S = M*a2;
     S = S((2*m-1):end);
-
+    
     a1a2 = S(1:m);
-        
+     
         
 end
