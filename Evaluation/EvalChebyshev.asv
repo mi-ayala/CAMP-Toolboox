@@ -17,7 +17,7 @@ function  R = EvalChebyshev(chebcoeffs,t)
         
         
         %%% ChebCoeffs
-        ChebC = repmat( chebcoeffs(2:end) , t_evaluations,1 );
+        ChebC = repmat( chebcoeffs(2:end) , t_evaluations,1 )
         
         %%% Chebpolynomials
         
@@ -33,7 +33,7 @@ function  R = EvalChebyshev(chebcoeffs,t)
              ChebP(:,i) = chebyshevT(i,t);
              
         end    
-        
+        ChebP
 
         R = chebcoeffs(1) + sum(  2.*ChebC.*ChebP,2);
        

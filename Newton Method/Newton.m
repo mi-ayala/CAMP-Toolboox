@@ -31,7 +31,7 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
 % 2. Linear and quadratic ratios
 % 3. Increment's size
 % 4. Residual's size
-% 5. One over the condition number of the derivative at final iteration
+% 5. One over the condition number of the derivative at first/final iteration
 % ================================================
 % January 2021, Miguel Ayala.
 % ================================================
