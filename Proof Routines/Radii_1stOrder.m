@@ -1,4 +1,4 @@
-function [rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
+function [xInt, rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
 % ================================================
 %  RADII POLYNOMIAL 1ST ORDER
 % ================================================
@@ -18,6 +18,7 @@ function [rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
 % ================================================
 % OUTPUT
 % ================================================
+% xInt ............ Interval solution
 % rmin ............ Min  existence radius
 % rmax ............ Max  existence radius
 % I ............... 0 for Success, 1 for fail
@@ -27,9 +28,9 @@ function [rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
 % 1. Y Bound
 % 2. Z Bound
 % 3. r*
-% 4. Existence interval size size
+% 4. Existence interval size 
 % ================================================
-% February 2021, Miguel Ayala.
+% January 2022, Miguel Ayala.
 % ================================================ 
   
    %%% This part handles the inputs. I do this so I can suppress printed
@@ -81,12 +82,14 @@ function [rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
             Y = intval(Y);
             Z = intval(Z);
             
-            if sup(-Y/(Z-1) - r_star ) < 0
+            if sup(-Y/(Z-1) - intval(r_star) ) < 0
                 
-                 rmin= sup(-Y/(Z-1));
-                 rmax=r_star;     
+                 rmin= -Y/(Z-1);
+                 rmax= r_star;     
                  
-                 existenceInterval_size = abs(rmax-rmin);
+                existenceInterval_size = sup(rmax-rmin);
+                xInt = midrad(x, sup((1/2)*(rmax-rmin)) );
+                
                  I = 0; 
                  
                  fprintf([ '\n'...
@@ -109,9 +112,12 @@ function [rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
         end
         
         if i==52
+
                  I = 1;
-                 rmin= 0;
-                 rmax=0; 
+                 rmin = 0;
+                 rmax = 0; 
+                 xInt = [];
+
                  fprintf([ '\n'...
                         'Radii_1stOrder: It was not possible to find a r_star.'          
                         ])              
