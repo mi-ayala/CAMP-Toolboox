@@ -1,0 +1,23 @@
+function  [Dfx, Dfx_FD] = CompareFiniteDiff(f, tol)
+%  ==================================================
+%  CompareFiniteDiff
+%  ==================================================
+%  DESCRIPTION
+%  Computes Df with Finite differences up to a 
+%  tolerance tol at a random point 
+%  and then compares with implementation
+%  of derivative.
+%  __________________________________________________
+%  INPUT
+%  f   .. Function and derivative [f, Df]
+%  tol .. Tolerance for finete differences
+%  __________________________________________________
+%  OUTPUT
+%
+%  D  
+%  __________________________________________________
+%  MATLAB 9.11.0.1809720 (R2021b) Update 1
+%  Miguel Ayala, 06-Jan-2022.
+%  ==================================================
+
+end  

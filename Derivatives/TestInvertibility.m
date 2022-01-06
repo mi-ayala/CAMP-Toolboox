@@ -1,4 +1,4 @@
-function  [nullity_QR,null_space] = InvertibilityTest(A)
+function  [nullity_QR,null_space] = TestInvertibility(A)
 %  ==================================================
 %  InvertibilityTest
 %  ==================================================
