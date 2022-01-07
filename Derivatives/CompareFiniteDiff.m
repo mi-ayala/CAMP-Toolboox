@@ -25,7 +25,7 @@ function  [Dfx, Dfx_FD] = CompareFiniteDiff(f,n, tol)
     
     [~, Dfx] = f(x);
 
-    Dfx_FD = DeriveFiniteDiff(f, tol);
+    Dfx_FD = DeriveFiniteDiff(f, x, tol);
 
     Norm_of_difference = norm(Dfx_FD - Dfx)
 

@@ -8,6 +8,7 @@ function DF = DeriveFiniteDiff(F,x, tol)
 %  __________________________________________________
 %  INPUT
 %  F   .. Function 
+%  x   .. Evaluation point
 %  tol .. Tolerance for finite differences
 %  __________________________________________________
 %  OUTPUT
@@ -17,9 +18,11 @@ function DF = DeriveFiniteDiff(F,x, tol)
 %  Miguel Ayala, 05-Jan-2022.
 %  ==================================================
 
-    x = reshape(x, [], 1);
+    x = reshape(x, [], 1); 
 
     h = tol;
+
+
     m = length(x);
     E = eye(m, m);
 

@@ -75,12 +75,9 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
         %%% Variables
         x = reshape(xInput,[],1);
 
-%         if nargout(f) == 1
-            fx = f(x);
-            dfx  =  D_FiniteDiff(f,x);
-%         else
-%             [fx,dfx] = f(x);
-%         end  
+
+        fx = f(x);
+        dfx  =  DeriveFiniteDiff(f,x,10^-8);
 
         incrementNorm = 1;
         residual = 1;
