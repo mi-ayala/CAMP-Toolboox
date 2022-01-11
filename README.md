@@ -9,7 +9,6 @@ CAMP-Toolboox
 │  ├─ convConv.m
 │  ├─ convFFT.m
 │  ├─ convToeplitz.m
-│  └─ cubic_convFFT.m
 ├─ Derivatives
 │  ├─ CompareFiniteDiff.m
 │  ├─ DeriveFiniteDiff.m
