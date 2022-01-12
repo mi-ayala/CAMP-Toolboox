@@ -72,7 +72,7 @@ function [xInt, rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
         [f_ball, df_ball] = f(x_ball);
         
         %%% Z bound, should be less than one.
-        Z = sup(norm(eye(length(A(1,:))) - A*df_ball,inf));
+        Z = sup(norm(eye(length(A(1,:))) - intval(A)*df_ball,inf));
         
         if Z < 1
             
