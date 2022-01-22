@@ -32,6 +32,14 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
 % 3. Increment's size
 % 4. Residual's size
 % 5. One over the condition number of the derivative at first/final iteration
+% 6. Final iteration ||inv(DF)||_infty
+% ================================================
+%  NOTES
+% ================================================
+% If the convergence is quadratic, 
+% r_2 will remain bounded and r_1 will approach zero. 
+% If the convergence is linear,  r_2 
+% will become unbounded and  r_1 will remain larger than zero.
 % ================================================
 % January 2021, Miguel Ayala.
 % ================================================
@@ -88,6 +96,7 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
 
         %%%  Testing invertibility of derivative and finding increment
         conditionNum =  cond(dfx)^(-1);
+        invnorm = norm(inv(dfx),inf);
 
         if (conditionNum > 10^(-12)) 
 
@@ -111,8 +120,9 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
                 '        quadratic rate =  %g, \n' ...
                 '        increment size =  %g, \n' ...
                 '        final residual size =  %g, \n' ...
-                '        derivative final condition number =  %g. \n' ...            
-                ], [residual_0,initial_condition_number,ite, r1,r2,incrementNorm,residual,conditionNum])  
+                '        derivative final condition number =  %g, \n' ...          
+                '        ||inv(DF)||  =  %g. \n' ...      
+                ], [residual_0,initial_condition_number,ite, r1,r2,incrementNorm,residual,conditionNum, invnorm])  
             end
 
             return
@@ -122,6 +132,7 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
         x = x - increment;
         [fx,dfx] = f(x);
         residual = norm(fx,inf);
+        invnorm = norm(inv(dfx),inf);
 
         %%% Print data after each iteration
         %fprintf('newton:%i,  residual =  %.10e,\n' ,[ite,residual])
@@ -145,9 +156,10 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
                     '        quadratic rate =  %g, \n' ...
                     '        increment size =  %g, \n' ...
                     '        final residual size =  %g, \n' ...
-                    '        derivative condition number =  %g. \n' ...
+                    '        derivative condition number =  %g, \n' ...
+                    '        ||inv(DF)||  =  %g. \n' ...
                     '\n'
-                    ], [epsilon, initial_condition_number, residual_0, ite, r1,r2,incrementNorm,residual,conditionNum])    
+                    ], [epsilon, initial_condition_number, residual_0, ite, r1,r2,incrementNorm,residual,conditionNum,invnorm])    
             end
 
             return
@@ -172,8 +184,9 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
             '        quadratic rate =  %g, \n' ...
             '        increment size =  %g, \n' ...
             '        final residual size =  %g, \n' ...
-            '        derivative condition number =  %g. \n' ...
-            ], [residual_0, initial_condition_number, ite, r1,r2,incrementNorm,residual,conditionNum])  
+            '        derivative condition number =  %g, \n' ...
+            '        ||inv(DF)||  =  %g. \n' ...
+            ], [residual_0, initial_condition_number, ite, r1,r2,incrementNorm,residual,conditionNum,invnorm])  
     end
 
 end

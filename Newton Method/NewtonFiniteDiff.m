@@ -1,42 +1,49 @@
 function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
-    % ================================================
-    %  NEWTON'S METHOD with Finite Differences 
-    %  (It does not requiere explicit derivative)
-    %   Stopping test: Residual < 1e-15 
-    %   Norm: Infinity norm 
-    % ================================================
-    % Example
-    % ================================================
-    % newton(f, xInput, maxIte, 'printResults', 'off')
-    % ================================================
-    % INPUT
-    % ================================================
-    % f ............... Function  
-    % xInput .......... Initial guess
-    % ================================================
-    % OPTIONAL INPUT
-    % ================================================
-    % maxIte .......... Maximum number of iterations
-    % printResults .... Followed by 'on' or 'off'
-    % ================================================
-    % OUTPUT
-    % ================================================
-    % x ............... Approximate solution
-    % iter ............ Number of iterations
-    % increment ....... Increment's size
-    % residual ........ Residual's size
-    % ================================================
-    %  PRINTED OUTPUT
-    % ================================================
-    % 1. Iterations
-    % 2. Linear and quadratic ratios
-    % 3. Increment's size
-    % 4. Residual's size
-    % 5. One over the condition number of the derivative at final iteration
-    % ================================================
-    % January 2021, Miguel Ayala.
-    % ================================================
-    
+% ================================================
+%  NEWTON'S METHOD with Finite Differences 
+%  (It does not requiere explicit derivative)
+%   Stopping test: Residual < 1e-15 
+%   Norm: Infinity norm 
+% ================================================
+% Example
+% ================================================
+% newton(f, xInput, maxIte, 'printResults', 'off')
+% ================================================
+% INPUT
+% ================================================
+% f ............... Function  
+% xInput .......... Initial guess
+% ================================================
+% OPTIONAL INPUT
+% ================================================
+% maxIte .......... Maximum number of iterations
+% printResults .... Followed by 'on' or 'off'
+% ================================================
+% OUTPUT
+% ================================================
+% x ............... Approximate solution
+% iter ............ Number of iterations
+% increment ....... Increment's size
+% residual ........ Residual's size
+% ================================================
+%  PRINTED OUTPUT
+% ================================================
+% 1. Iterations
+% 2. Linear and quadratic ratios
+% 3. Increment's size
+% 4. Residual's size
+% 5. One over the condition number of the derivative at final iteration
+% ================================================
+%  NOTES
+% ================================================
+% If the convergence is quadratic, 
+% r_2 will remain bounded and r_1 will approach zero. 
+% If the convergence is linear,  r_2 
+% will become unbounded and  r_1 will remain larger than zero.
+% ================================================
+% January 2021, Miguel Ayala.
+% ================================================
+
        %%% This part handles the inputs. I do this so I can suppress printed
        %%% output easily (useful when looking for solutions).
        default_maxIter = 40;
@@ -86,6 +93,7 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
     
         residual_0 = norm(fx,inf) ;
         initial_condition_number = cond(dfx)^(-1);
+        invnorm = norm(inv(dfx),inf);
         
         for ite = 1:maxIter 
     
@@ -103,7 +111,7 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
                 %%% Convergence rates
                 r1 = incrementNorm/oldIncrementNorm ;   
                 r2 = incrementNorm/oldIncrementNorm.^2;
-                %x = reshape(x,1,[]);
+                
     
                 if printResults == 1
                     fprintf([ '\n'...
@@ -116,8 +124,9 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
                     '        quadratic rate =  %g, \n' ...
                     '        increment size =  %g, \n' ...
                     '        final residual size =  %g, \n' ...
-                    '        derivative condition number =  %g. \n' ...            
-                    ], [residual_0,initial_condition_number,ite, r1,r2,incrementNorm,residual,conditionNum])  
+                    '        derivative condition number =  %g, \n' ...  
+                    '        ||inv(DF)||  =  %g. \n' ...          
+                    ], [residual_0,initial_condition_number,ite, r1,r2,incrementNorm,residual,conditionNum,invnorm])  
                 end
     
                 return
@@ -128,7 +137,8 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
 
 %             if nargout(f) == 1
                 fx = f(x);
-                dfx  =  D_FiniteDiff(f,x);
+                dfx  =  DeriveFiniteDiff(f,x,10^-8);
+                invnorm = norm(inv(dfx),inf);
 %             else
 %                 [fx,dfx] = f(x);
 %             end  
@@ -144,7 +154,7 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
                 %%% Convergence rates
                 r1 = incrementNorm/oldIncrementNorm ;   
                 r2 = incrementNorm/oldIncrementNorm.^2;
-                %x = reshape(x,1,[]);
+                
     
                 if printResults == 1
                     fprintf([ '\n'...
@@ -157,9 +167,10 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
                         '        quadratic rate =  %g, \n' ...
                         '        increment size =  %g, \n' ...
                         '        final residual size =  %g, \n' ...
-                        '        derivative condition number =  %g. \n' ...
+                        '        derivative condition number =  %g, \n' ...
+                        '        ||inv(DF)||  =  %g. \n' ...
                         '\n'
-                        ], [epsilon, residual_0,initial_condition_number, ite, r1,r2,incrementNorm,residual,conditionNum])    
+                        ], [epsilon, residual_0,initial_condition_number, ite, r1,r2,incrementNorm,residual,conditionNum,invnorm])    
                 end
     
                 return
@@ -171,7 +182,7 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
         %%% Convergence rates
         r1 = incrementNorm/oldIncrementNorm ;   
         r2 = incrementNorm/oldIncrementNorm.^2;
-        %x = reshape(x,1,[]);
+        
     
         if printResults == 1
             fprintf([ '\n'...
@@ -184,27 +195,12 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
                 '        quadratic rate =  %g, \n' ...
                 '        increment size =  %g, \n' ...
                 '        final residual size =  %g, \n' ...
-                '        derivative condition number =  %g. \n' ...
-                ], [residual_0,initial_condition_number,ite, r1,r2,incrementNorm,residual,conditionNum])  
+                '        derivative condition number =  %g, \n' ...
+                '        ||inv(DF)||  =  %g. \n' ...
+                ], [residual_0,initial_condition_number,ite, r1,r2,incrementNorm,residual,conditionNum,invnorm])  
         end
     
     end
     
-    
-    function DF = D_FiniteDiff(F,x)
-    
-        x = reshape(x, [], 1);
-    
-        h = 1e-8;
-        m = length(x);
-        E = eye( m, m);
-    
-        DF = zeros(m,m);
-    
-        for j = 1:m
-            xh = x + h*E(:,j);
-            DF(:,j) = (F(xh) - F(x) )/h;
-        end
-        
-    end
+
     
