@@ -14,7 +14,7 @@ function  [Dfx, Dfx_FD] = CompareFiniteDiff(f,n, tol)
 %  tol .. Tolerance for finite differences
 %  __________________________________________________
 %  OUTPUT
-%  Dfx    .. Derivative
+%  Dfx    .. Implemented derivative
 %  Dfx_FD .. Finite differences derivative  
 %  __________________________________________________
 %  MATLAB 9.11.0.1809720 (R2021b) Update 1
@@ -22,11 +22,11 @@ function  [Dfx, Dfx_FD] = CompareFiniteDiff(f,n, tol)
 %  ==================================================
 
     x = rand(n,1);
-    
+     
     [~, Dfx] = f(x);
-
+    
     Dfx_FD = DeriveFiniteDiff(f, x, tol);
-
-    Norm_of_difference = norm(Dfx_FD - Dfx)
+    
+    Norm_of_difference = norm(abs(Dfx_FD) - abs(Dfx), inf)
 
 end  

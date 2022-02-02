@@ -40,6 +40,7 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
 % r_2 will remain bounded and r_1 will approach zero. 
 % If the convergence is linear,  r_2 
 % will become unbounded and  r_1 will remain larger than zero.
+% Residual AND increment have to be very small to talk about convergence.
 % ================================================
 % January 2021, Miguel Ayala.
 % ================================================

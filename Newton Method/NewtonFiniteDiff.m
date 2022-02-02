@@ -77,7 +77,7 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
         %%% ***************************************+
         
         %%% Stops until increment < epsilon
-        epsilon = 1e-13;
+        epsilon = 1e-15;
     
         %%% Variables
         x = reshape(xInput,[],1);

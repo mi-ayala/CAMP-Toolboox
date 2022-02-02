@@ -22,7 +22,6 @@ function DF = DeriveFiniteDiff(F,x, tol)
 
     h = tol;
 
-
     m = length(x);
     E = eye(m, m);
 
