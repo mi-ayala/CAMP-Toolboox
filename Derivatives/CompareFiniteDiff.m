@@ -17,6 +17,11 @@ function  [Dfx, Dfx_FD] = CompareFiniteDiff(f,n, tol)
 %  Dfx    .. Implemented derivative
 %  Dfx_FD .. Finite differences derivative  
 %  __________________________________________________
+%  NOTES
+%  If the function fail it usually means that the
+%  the implemationsof the derivative is wrong.
+%  Use with an small number of inputs.
+%  __________________________________________________
 %  MATLAB 9.11.0.1809720 (R2021b) Update 1
 %  Miguel Ayala, 06-Jan-2022.
 %  ==================================================
