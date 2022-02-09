@@ -1,37 +1,39 @@
-function  l1_norm(a, nu)
+function  Norm = l1_norm(a, nu, varargin)
 %  ==================================================
 %  l1_norm
 %  ==================================================
-%  DESCRIPTION It should compute norms on weighted {l^1}^n
-%  for a particular weight nu.
+%  DESCRIPTION 
+%  Computes {l^1}^n geometric-weighted norm.
+%  If a is matrix, it computes the norm by columns.
 %  __________________________________________________
 %  INPUT
+%  a .. sequence
+%  nu .. weight
+%  varargin ..  1 for one-sided seq.
+%              -1 for two sided seq.
 %  __________________________________________________
 %  OUTPUT
+%  Norm ..  l1 geometric-weighted norm of a
 %  __________________________________________________
 %  MATLAB 9.11.0.1837725 (R2021b) Update 2
 %  Miguel Ayala, 08-Feb-2022.
 %  ==================================================
 
-%%% Testing external code
-%
-%     N = length(a(:,1))-1;
-%     vect_nu = nu.^((0:N)');
-%     vect_nu(2:end) = 2*vect_nu(2:end);
-%     Norm_nu = sum(abs(a).*vect_nu);
-% 
-% % This function computes the $l^1_{\nu}$ norm of 
-% % u=(u_{\alpha})_{\vert\alpha\vert \ge 0}, where $u_{\alpha}$ is a scalar
-% 
-% if nu==1
-%     val=sum(abs(u));
-% else
-%     vect_alpha=0*u;
-%     pos=0;
-%     for k=0:N-1    %k=|alpha|
-%         vect_alpha(pos+(1:(k+1)))=k*ones((k+1),1);
-%         pos=pos+(k+1);
-%     end
-%     val=abs(u')*nu.^vect_alpha;
+    %%% Number of modes
+    N = length(a(:,1))-1;
+
+    %%% Geometric weight
+    if isempty(varargin)
+        index = 0:N;
+    else
+        N = (N-1)/2;
+        index = -N:N ;
+    end          
+    exponent = repmat(index', 1, length(a(1,:)) );
+    w = nu*ones(size(a));
+
+    %%% Building output  
+    Norm = sum( abs(a).* (w.^exponent) , 1);
+
 
 end  
