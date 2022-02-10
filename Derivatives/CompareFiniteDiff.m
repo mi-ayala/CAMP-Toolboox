@@ -32,6 +32,11 @@ function  [Dfx, Dfx_FD] = CompareFiniteDiff(f,n, tol)
     
     Dfx_FD = DeriveFiniteDiff(f, x, tol);
     
-    Norm_of_difference = norm(abs(Dfx_FD) - abs(Dfx), inf)
+    Norm_of_difference = norm(abs(Dfx_FD) - abs(Dfx), inf);
+
+    fprintf([ '\n'...
+    'CompareFiniteDiff: Infinity norm of the difference is %g.' ...
+    '\n' ...
+    ], [Norm_of_difference]);  
 
 end  
