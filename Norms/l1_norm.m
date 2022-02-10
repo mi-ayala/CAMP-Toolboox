@@ -5,6 +5,7 @@ function  Norm = l1_norm(a, nu, varargin)
 %  DESCRIPTION 
 %  Computes {l^1}^n geometric-weighted norm.
 %  If a is matrix, it computes the norm by columns.
+%  varargin should be the indeces
 %  __________________________________________________
 %  INPUT
 %  a .. sequence
@@ -23,12 +24,15 @@ function  Norm = l1_norm(a, nu, varargin)
     N = length(a(:,1))-1;
 
     %%% Geometric weight
+
     if isempty(varargin)
         index = 0:N;
     else
-        N = (N-1)/2;
-        index = -N:N ;
+        %N = (N-1)/2;
+        %index = -N:N;
+        index = varargin;
     end          
+
     exponent = repmat(index', 1, length(a(1,:)) );
     w = nu*ones(size(a));
 
