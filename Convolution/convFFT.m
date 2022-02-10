@@ -3,7 +3,14 @@ function s = convFFT(a1,a2)
 %  convFFT
 %  ==================================================
 %  DESCRIPTION 
-%  For one-sided sequences.
+%  Convolution for one-sided sequences.
+%  __________________________________________________
+%  INPUT
+%  a1   .. one-sided sequence 
+%  a2   .. one-sided sequence
+%  __________________________________________________
+%  OUTPUT
+%  a1a2 .. Truncated convolution a1*a2 
 %  __________________________________________________
 %  Nov 2021, Miguel Ayala.
 %  ==================================================
