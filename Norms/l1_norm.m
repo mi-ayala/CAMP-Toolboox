@@ -28,9 +28,9 @@ function  Norm = l1_norm(a, nu, varargin)
     if isempty(varargin)
         index = 0:N;
     else
-        %N = (N-1)/2;
-        %index = -N:N;
-        index = varargin;
+        N = (N-1)/2;
+        index = -N:N;
+        %index = varargin;
     end          
 
     exponent = repmat(index', 1, length(a(1,:)) );
