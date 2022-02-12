@@ -1,4 +1,4 @@
-function  [var extraVar]StructureVariable(x, structure)
+function  [var extraVar m] = StructureVariable(x, structure)
 %  ==================================================
 %  StructureVariable
 %  ==================================================
