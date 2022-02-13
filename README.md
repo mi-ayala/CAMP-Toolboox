@@ -3,6 +3,7 @@
 Routines I use for my research projects in rigorous numerics and computer assisted proofs. 
 Let me know if you would like to include some of your own routines.
 
+Notes:
 Some of the tools require Intlab.
 
 
@@ -32,3 +33,5 @@ CAMP-Toolboox
    └─ Convolution_Test.mlx
 
 ```
+Miguel Ayala 2022
+You can follow me on [GitHub](https://github.com/mi-ayala). 
