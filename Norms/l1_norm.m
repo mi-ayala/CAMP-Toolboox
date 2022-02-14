@@ -5,13 +5,12 @@ function  Norm = l1_norm(a, nu, varargin)
 %  DESCRIPTION 
 %  Computes {l^1}^n geometric-weighted norm.
 %  If a is matrix, it computes the norm by columns.
-%  varargin should be the indeces
 %  __________________________________________________
 %  INPUT
 %  a .. sequence
 %  nu .. weight
 %  varargin ..  1 for one-sided seq.
-%              -1 for two sided seq.
+%               2 for two sided seq.
 %  __________________________________________________
 %  OUTPUT
 %  Norm ..  l1 geometric-weighted norm of a
