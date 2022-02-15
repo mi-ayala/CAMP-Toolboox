@@ -1,4 +1,4 @@
-function  [var extraVar m] = StructureVariable(x, structure)
+function  [var extraVar] = StructureVariable(x, structure)
 %  ==================================================
 %  StructureVariable
 %  ==================================================
@@ -26,12 +26,13 @@ function  [var extraVar m] = StructureVariable(x, structure)
     var = reshape(x(ExtraVar + 1: end), [],SequenceVar);
     extraVar = x(1:ExtraVar);
 
-    %%% Number of modes, not including zero mode.
-    if SequenceStructure == 1
-        m = length(var(:,1)) - 1;
-    else  
-        m = (length(var(:,1)) - 1)/2;
-    end    
+    % %%% Number of modes, not including zero mode.
+    % There is a function for this.
+    % if SequenceStructure == 1
+    %     m = length(var(:,1)) - 1;
+    % else  
+    %     m = (length(var(:,1)) - 1)/2;
+    % end    
 
 
 end  

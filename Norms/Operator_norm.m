@@ -26,12 +26,28 @@ function  Norm = Operator_norm(a, nu, structure)
     NumVar = structure(2);
     SequenceStructure = structure(3);
 
+   %%%% Number of modes 
+   [m, M] = GetNumModes(a(1,;),  structure);
+
+   %%%% Weights
+
+    if SequenceStructure == 1
+        %index = 0:m;
+        exponent1 = repmat((0:m)', 1 ,M);
+        w = nu.^abs(exponent1);
+        aw = abs(a).*w;
+        exponent2 = 1./abs((0:m)');
+
+    else
+        %index = -m:m;
+        exponent1 = repmat((-m:m)', 1 ,M);
+        w = nu.^abs(exponent1);
+        aw = abs(a).*w;
+        exponent2 = 1./abs((-m:m)');
+    end    
+
    %%% First with nu = 1
    %%% Split in horizontal blocks
-
-   %%% Total number of modes including zero
-   M = length(a(1,;))/NumVar;
-   
    index = [ones(M,1); zeros(M*(NumVar-1),1)];
 
    %%% Block by block
@@ -40,7 +56,7 @@ function  Norm = Operator_norm(a, nu, structure)
    for i = 0:NumVar-1  
 
     index = circshift(a, i);
-    Norm = Norm + max(abs(a)*index);
+    Norm = Norm + max(exponent2.*(aw*index));
 
    end
    
