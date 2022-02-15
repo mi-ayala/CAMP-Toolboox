@@ -1,6 +1,6 @@
 # CAMP-Toolboox
 
-Routines I use for my research projects in rigorous numerics and computer assisted proofs. 
+Basic routines I use for my research projects in rigorous numerics and computer assisted proofs. 
 Let me know if you would like to include some of your own routines.
 
 Notes:
