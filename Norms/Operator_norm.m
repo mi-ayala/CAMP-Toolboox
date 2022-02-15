@@ -1,17 +1,17 @@
 
-function  Norm = Operator_norm(a, nu, varargin)
+function  Norm = Operator_norm(a, nu, structure)
 %  ==================================================
-%  l1_norm
+%  Operator_norm
 %  ==================================================
 %  DESCRIPTION 
-%  Computes {l^1}^n geometric-weighted norm.
-%  If a is matrix, it computes the norm by columns.
+%  Computes the weighted operator norm.
 %  __________________________________________________
 %  INPUT
 %  a .. sequence
 %  nu .. weight
-%  varargin ..  1 for one-sided seq.
-%               2 for two sided seq.
+%  structure .. variable structure
+%  [number of extraVar,  number of seqVar, 2] for 2-sided seq.
+%  [number of extraVar,  number of seqVar, 1] for 1-sided seq.
 %  __________________________________________________
 %  OUTPUT
 %  Norm ..  l1 geometric-weighted norm of a
@@ -20,24 +20,28 @@ function  Norm = Operator_norm(a, nu, varargin)
 %  Miguel Ayala, 08-Feb-2022.
 %  ==================================================
 
-    %%% Number of modes
-    N = length(a(:,1))-1;
+  %%% This part is not actually need it, but it is nice to always include
+  %%% the structure of the variable for each problem
+    ExtraVar = structure(1);
+    NumVar = structure(2);
+    SequenceStructure = structure(3);
 
-    %%% Geometric weight
+   %%% First with nu = 1
+   %%% Split in horizontal blocks
 
-    if isempty(varargin)
-        index = 0:N;
-    else
-        N = (N-1)/2;
-        index = -N:N;
-        %index = varargin;
-    end          
+   %%% Total number of modes including zero
+   M = length(a(1,;))/NumVar;
+   
+   index = [ones(M,1); zeros(M*(NumVar-1),1)];
 
-    exponent = repmat(index', 1, length(a(1,:)) );
-    w = nu*ones(size(a));
+   %%% Block by block
+   Norm = 0;
 
-    %%% Building output  
-    Norm = sum( abs(a).* (w.^exponent) , 1);
+   for i = 0:NumVar-1  
 
+    index = circshift(a, i);
+    Norm = Norm + max(abs(a)*index);
 
+   end
+   
 end  
