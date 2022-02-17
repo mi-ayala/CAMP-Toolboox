@@ -46,7 +46,7 @@ function  Norm = Operator_norm(a, nu, structure)
         exponent2 = 1./abs((-m:m)');
     end    
 
-   %%% First with nu = 1
+  
    %%% Split in horizontal blocks
    index = [ones(M,1); zeros(M*(NumVar-1),1)];
 
