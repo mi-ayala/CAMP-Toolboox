@@ -29,7 +29,8 @@ function  Norm = Operator_norm(a, nu, structure)
    %%%% Number of modes 
    [m, M] = GetNumModes(a(1,;),  structure);
 
-   %%%% Weights
+   %%%% Weight. Weighted operator norm? is this columns or rows based? can we do both??
+   %%% We need a test for this thing.
 
     if SequenceStructure == 1
         %index = 0:m;
