@@ -18,7 +18,7 @@ function  [m, M] = GetNumModes(a, structure)
 %  Miguel Ayala, 15-Feb-2022.
 %  ==================================================
 
-    a = reshape([],1);
+    a = reshape(a, [],1);
     ExtraVar = structure(1); %%% No need of this one
     SequenceVar = structure(2);
     SequenceStructure = structure(3);

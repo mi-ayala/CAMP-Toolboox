@@ -19,6 +19,10 @@ function  Norm = Operator_norm(a, nu, structure)
 %  MATLAB 9.11.0.1837725 (R2021b) Update 2
 %  Miguel Ayala, 08-Feb-2022.
 %  ==================================================
+  
+
+  %%% This routine is not very good. We need to change it.
+
   %%% It should give the column sum norm of a matrix
   %%% This part is not actually need it, but it is nice to always include
   %%% the structure of the variable for each problem
@@ -42,7 +46,7 @@ function  Norm = Operator_norm(a, nu, structure)
     else
         %index = -m:m;
         exponent1 = repmat((-m:m)', 1 ,M);
-        w = nu.^abs(exponent1);
+        w = nu.^abs(exponent1)
         aw = abs(a).*w;
         exponent2 = 1./abs((-m:m)');
     end    
