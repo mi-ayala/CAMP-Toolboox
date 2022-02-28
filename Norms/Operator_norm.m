@@ -19,7 +19,7 @@ function  Norm = Operator_norm(a, nu, structure)
 %  MATLAB 9.11.0.1837725 (R2021b) Update 2
 %  Miguel Ayala, 08-Feb-2022.
 %  ==================================================
-
+  %%% It should give the column sum norm of a matrix
   %%% This part is not actually need it, but it is nice to always include
   %%% the structure of the variable for each problem
     ExtraVar = structure(1);
@@ -27,7 +27,7 @@ function  Norm = Operator_norm(a, nu, structure)
     SequenceStructure = structure(3);
 
    %%%% Number of modes 
-   [m, M] = GetNumModes(a(1,;),  structure);
+   [m, M] = GetNumModes(a(1,:),  structure);
 
    %%%% Weight. Weighted operator norm? is this columns or rows based? can we do both??
    %%% We need a test for this thing.
