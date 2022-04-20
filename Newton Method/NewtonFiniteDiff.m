@@ -1,4 +1,4 @@
-function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
+function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, tol, varargin)
 % ================================================
 %  NEWTON'S METHOD with Finite Differences 
 %  (It does not requiere explicit derivative)
@@ -13,6 +13,7 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
 % ================================================
 % f ............... Function  
 % xInput .......... Initial guess
+% tol ............. Tolerance for finite differences 
 % ================================================
 % OPTIONAL INPUT
 % ================================================
@@ -54,16 +55,18 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
        
        addRequired(p,'f');
        addRequired(p,'xInput');
+       addRequired(p,'tol');
        
        addOptional(p,'maxIter',default_maxIter);
        addParameter(p,'printResults',default_printResults,...
                      @(x) any(validatestring(x,expected_printResults)));
        
-       parse(p,f, xInput,varargin{:});
+       parse(p,f, xInput,tol, varargin{:});
        
        f = p.Results.f;
        xInput = p.Results.xInput;
        maxIter =  p.Results.maxIter;
+       tol =  p.Results.tol;
           
        if strcmp(p.Results.printResults,'on')
                printResults = 1;
@@ -77,14 +80,14 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
         %%% ***************************************+
         
         %%% Stops until increment < epsilon
-        epsilon = 1e-15;
+        epsilon = 1e-13;
     
         %%% Variables
         x = reshape(xInput,[],1);
 
 
         fx = f(x);
-        dfx  =  DeriveFiniteDiff(f,x,10^-8);
+        dfx  =  DeriveFiniteDiff(f,x,tol);
 
         incrementNorm = 1;
         residual = 1;
@@ -135,14 +138,10 @@ function [x, ite, increment,residual] = NewtonFiniteDiff(f, xInput, varargin)
             %%% Updating variables
             x = x - increment;
 
-%             if nargout(f) == 1
                 fx = f(x);
-                dfx  =  DeriveFiniteDiff(f,x,10^-8);
+                dfx  =  DeriveFiniteDiff(f,x,tol);
                 invnorm = norm(inv(dfx),inf);
-%             else
-%                 [fx,dfx] = f(x);
-%             end  
-
+ 
             residual = norm(fx,inf);
     
             %%% Print data after each iteration

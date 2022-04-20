@@ -1,4 +1,4 @@
-function  [Dfx, Dfx_FD] = CompareFiniteDiff(f,n, tol)
+function  [Dfx, Dfx_FD] = CompareFiniteDiff(f,n,tol)
 %  ==================================================
 %  CompareFiniteDiff
 %  ==================================================

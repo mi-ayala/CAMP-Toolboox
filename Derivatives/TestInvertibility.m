@@ -3,6 +3,7 @@ function  [nullity_QR,null_space] = TestInvertibility(A)
 %  InvertibilityTest
 %  ==================================================
 %  DESCRIPTION  Computes condition number and kernel
+%               and smallest eigenvalues
 %  __________________________________________________
 %  INPUT        Square matrix
 %  __________________________________________________
@@ -17,12 +18,13 @@ function  [nullity_QR,null_space] = TestInvertibility(A)
     tol = 1e-6;
 
     %%% Condition Number
-    condition_Number = cond(A)^-1
+    condition_Number = cond(A)^-1;
     
     %%% Eig 
     [V,D] = eig(A);
-    kernel_index = find(abs(diag(D))<tol==1);
-    null_space = V(:,kernel_index)
+    kernel_index = find(abs(diag(D)) < tol==1);
+    null_space = V(:,kernel_index);
+   
        
     %%% QR decomposition
     [~,R] = qr(transpose(A));
@@ -31,8 +33,11 @@ function  [nullity_QR,null_space] = TestInvertibility(A)
     fprintf([ '\n'...
     'TestInvertibility: Infinity norm of the inverse is %g.' ...
     '\n' ...
-    '                   Nullity is  ' ...
-    ], [norm(inv(A),inf)]);  
+    '                   Nullity is  %g, \n' ...
+    '                   condition number =  %g. \n' ...    
+    ], [norm(inv(A),inf)], nullity_QR, condition_Number);  
 
 
-end  
+end 
+
+            
