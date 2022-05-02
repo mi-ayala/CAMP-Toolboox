@@ -101,14 +101,18 @@ function [xInt, rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
                       fprintf([ 
                         '                Y Bound = %i,\n' ...
                         '                Z Bound =  %g, \n' ...
-                        '                r_star   =  %g, \n' ...
+                        '                r_star   =  %g = 2^(-%i)% \n' ...
                         '                Existence Interval size =  %g. \n' ...           
-                        ], [mid(Y),mid(Z),r_star,existenceInterval_size]) 
+                        ], [mid(Y),mid(Z),r_star, i, existenceInterval_size]) 
                  end                    
                                  
                 return
             end
         
+        fprintf([ '\n'...
+            'Radii_1stOrder: Proof failed with r_star = = 2^(-%i).'          
+        ])  
+
         end
         
         if i==52

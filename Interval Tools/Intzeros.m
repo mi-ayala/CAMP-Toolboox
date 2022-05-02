@@ -1,4 +1,4 @@
-function  A = Intzeros(a,b)
+function  A = Intzeros(a,b, intswitch)
 %  ==================================================
 %  Intzeros
 %  ==================================================
@@ -8,6 +8,7 @@ function  A = Intzeros(a,b)
 %  INPUT
 %  a .. Positive interger
 %  b .. Positive interger
+%  int ...  Interval switch
 %  __________________________________________________
 %  OUTPUT
 %  A .. array of zeros. It is an interval if a is an 
@@ -17,13 +18,13 @@ function  A = Intzeros(a,b)
 %  Miguel Ayala, 10-Feb-2022.
 %  ==================================================
 
-    if exist('intval','file') && isintval(a)  
+    if intswitch==0 
     
-        A = intval(zeros(a,b));
+        A = zeros(a,b);
     
     else
     
-        A = zeros(a,b);
+        A = intval(zeros(a,b));
 
     end    
 
