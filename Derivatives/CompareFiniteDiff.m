@@ -18,8 +18,8 @@ function  [Dfx, Dfx_FD] = CompareFiniteDiff(f,n,tol)
 %  Dfx_FD .. Finite differences derivative  
 %  __________________________________________________
 %  NOTES
-%  If the function fail it usually means that the
-%  the implemationsof the derivative is wrong.
+%  If the function fails it usually means that the
+%  the implemations of the derivative is wrong.
 %  Use with an small number of inputs.
 %  __________________________________________________
 %  MATLAB 9.11.0.1809720 (R2021b) Update 1
@@ -32,7 +32,7 @@ function  [Dfx, Dfx_FD] = CompareFiniteDiff(f,n,tol)
     
     Dfx_FD = DeriveFiniteDiff(f, x, tol);
     
-    Norm_of_difference = norm(abs(Dfx_FD) - abs(Dfx), inf);
+    Norm_of_difference = norm(Dfx_FD - Dfx, inf);
 
     fprintf([ '\n'...
     'CompareFiniteDiff: Infinity norm of the difference is %g.' ...

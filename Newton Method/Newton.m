@@ -47,7 +47,7 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
 
    %%% This part handles the inputs. I do this so I can suppress printed
    %%% output easily (useful when looking for solutions).
-   default_maxIter = 1;
+   default_maxIter = 120;
    default_printResults = 'on';
    expected_printResults = {'on','off'};
 

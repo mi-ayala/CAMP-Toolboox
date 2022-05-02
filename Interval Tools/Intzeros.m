@@ -1,6 +1,6 @@
-function  A = MyZero(a,b)
+function  A = Intzeros(a,b)
 %  ==================================================
-%  MyZero
+%  Intzeros
 %  ==================================================
 %  DESCRIPTION Creates zeros(a,b) or  
 %              intval(zeros(a,b)) depending on input.
