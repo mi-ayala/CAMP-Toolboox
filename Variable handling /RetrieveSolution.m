@@ -1,4 +1,4 @@
-function   [xInt, rmin, rmax, I] = RetrieveSolution(filemat)
+function   [xInt, x, rmin, rmax, I] = RetrieveSolution(filemat)
 %  ==================================================
 %  RetrieveSolution
 %  ==================================================
@@ -38,6 +38,11 @@ fprintf([
             ], [ loadedVars.rmin, loadedVars.rmax] ) 
 
 
+   xInt, x, rmin, rmax;
+   xInt = loadedVars.xInt;
+   x  = loadedVars.x;
+   rmin =loadedVars.rmin;
+   rmax =loadedVars.rmax;
 
 
 
