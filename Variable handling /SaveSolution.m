@@ -15,7 +15,7 @@ function  SaveSolution(zfp_Name, xInt, x, rmin, rmax, I )
     
     %time = datestr(now, 'yyyy_mm_dd');
     filename = sprintf('%s.mat',  zfp_Name);
-    save( filename, 'xInt', 'x' 'rmin', 'rmax', 'I', 'zfp_Name' );
+    save( filename, 'xInt', 'x', 'rmin', 'rmax', 'I', 'zfp_Name' );
 
     fprintf([ '\n'...
                         'SavedSolution: Saved!' ...

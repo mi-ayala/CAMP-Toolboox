@@ -160,7 +160,7 @@ function [x, ite, increment,residual] = Newton(f, xInput, varargin)
                     '        derivative condition number =  %g, \n' ...
                     '        ||inv(DF)||  =  %g. \n' ...
                     '\n'
-                    ], [epsilon, initial_condition_number, residual_0, ite, r1,r2,incrementNorm,residual,conditionNum,invnorm])    
+                    ], [epsilon, residual_0, initial_condition_number, ite, r1,r2,incrementNorm,residual,conditionNum,invnorm])    
             end
 
             return

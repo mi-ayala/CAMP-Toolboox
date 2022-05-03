@@ -62,10 +62,16 @@ function [xInt, rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
     %%% ***************************************
     %%% MATH STARTS HERE
     %%% ***************************************
+    
+    fprintf([ '\n'...
+    'Radii_1stOrder: \n'...
+    '               Running validation...\n' ...        
+    ]) 
 
     [f_int,df_int] = f(intval(x));
-    
-    for i = 1:52
+
+    for i = 18:52
+        
         
         r_star = 1/(2^i);
         x_ball = midrad(x, r_star);
@@ -92,27 +98,35 @@ function [xInt, rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
                 
                  I = 0; 
                  
-                 fprintf([ '\n'...
-                        'Radii_1stOrder: Successful validation.' ...
-                        '\n \n' ...         
-                        ]) 
-                 
                  if printResults == 1
+
+                      fprintf([ '\n'...
+                      '               Successful validation with:' ...
+                      '\n ' ...         
+                      ]) 
+
                       fprintf([ 
-                        '                Y Bound = %i,\n' ...
-                        '                Z Bound =  %g, \n' ...
-                        '                r_star   =  %g = 2^(-%i)% \n' ...
-                        '                Existence Interval size =  %g. \n' ...           
+                        '                 Y Bound = %i,\n' ...
+                        '                  Z Bound =  %g, \n' ...
+                        '                  r_star   =  %g = 2^-%i, \n' ...
+                        '                  Existence Interval size =  %g. \n' ...           
                         ], [mid(Y),mid(Z),r_star, i, existenceInterval_size]) 
                  end                    
                                  
                 return
             end
-        
-        fprintf([ '\n'...
-            'Radii_1stOrder: Proof failed with r_star = = 2^(-%i).'          
-        ])  
 
+        end
+
+        for j = 1:5
+
+            if i == 10*j
+                fprintf([ ...
+                      '                  r_star has to be less than 2^-%i.'          
+                ],[i]) 
+            end    
+
+             
         end
         
         if i==52
@@ -123,7 +137,7 @@ function [xInt, rmin, rmax, I] = Radii_1stOrder(f,x,A, varargin)
                  xInt = [];
 
                  fprintf([ '\n'...
-                        'Radii_1stOrder: It was not possible to find a r_star.'          
+                        '               It was not possible to find a r_star.'          
                         ])              
         end
         
