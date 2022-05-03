@@ -1,4 +1,4 @@
-function  SaveSolution(zfp_Name, RadiiOutput )
+function  SaveSolution(zfp_Name, xInt, rmin, rmax, I )
     %  ==================================================
     %  SaveSolution
     %  ==================================================
@@ -13,8 +13,13 @@ function  SaveSolution(zfp_Name, RadiiOutput )
     %  Miguel Ayala, 02-May-2022.
     %  ==================================================
     
-    time = datestr(now, 'yyyy_mm_dd');
-    filename = sprintf('%s _%s.mat', time, zfp_Name);
-    save( filename, 'RadiiOutput' );
+    %time = datestr(now, 'yyyy_mm_dd');
+    filename = sprintf('%s.mat',  zfp_Name);
+    save( filename, 'xInt', 'rmin', 'rmax', 'I', 'zfp_Name' );
+
+    fprintf([ '\n'...
+                        'SavedSolution: Saved!' ...
+                        '\n' ...         
+                        ]) 
     
     end  
