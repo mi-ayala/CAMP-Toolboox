@@ -31,19 +31,19 @@ else
    ], [loadedVars.zfp_Name]) 
 end 
 
-fprintf([ 
-            '                Solution details:\n'...
-            '                rmin =  %g, \n' ...
-            '                rmax   = %g . \n' ...
-            ], [ loadedVars.rmin, loadedVars.rmax] ) 
+% fprintf([ 
+%             '                Solution details:\n'...
+%             '                rmin =  %g, \n' ...
+%             '                rmax   = %g . \n' ...
+%             ], [ loadedVars.rmin, loadedVars.rmax] ) 
 
 
-   xInt, x, rmin, rmax;
+ 
    xInt = loadedVars.xInt;
    x  = loadedVars.x;
    rmin =loadedVars.rmin;
    rmax =loadedVars.rmax;
-
+   I =loadedVars.I;
 
 
 end  
