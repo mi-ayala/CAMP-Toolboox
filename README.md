@@ -1,6 +1,6 @@
 # CAMP-Toolboox
 
-Basic routines I use for my research projects in rigorous numerics and computer assisted proofs. 
+Basic routines I use for my research projects in rigorous numerics and computer assisted proofs with MATLAB. 
 
 
 Notes:
